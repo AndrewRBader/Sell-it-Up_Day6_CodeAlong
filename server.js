@@ -8,7 +8,7 @@ const app = express();
 const PORT = 4000;
 
 // app configs - app.set()
-
+app.set('view engine', 'ejs')
 
 /* 
     App Data:
@@ -57,7 +57,10 @@ app.get('/products/:id/', (req, res) => {
 // Product "index" route - GET - all products
 
 app.get('/products', (req,res)=>{
-    res.send(products)
+    // res.send(products)
+    const context = { products }
+    console.log(app.locals)
+    res.render('index', context)
 })
 
 // "Home" route
