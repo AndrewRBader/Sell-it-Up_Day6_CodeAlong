@@ -7,7 +7,7 @@ const app = express();
 // configure the app settings (used by app.listen)
 const PORT = 4000;
 
-
+// app configs - app.set()
 
 
 /* 
@@ -15,10 +15,11 @@ const PORT = 4000;
     The products routes below accesses data from the 'products' array (DB) by its index value - we will use 'productId' as the param key.
 */
 
-const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
+// const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
 
-
-
+// MODELS
+const products = require('./models/product_model')
+// console.log(products)
 
 /* 
     EXPRESS Middleware - a later topic - this code will run for every route
@@ -26,7 +27,7 @@ const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
 
 
 
-
+// CONTROLLER 
 /* 
     EXPRESS Routing: express provides route methods that will intercept requests to the server:
     1. filter by method - app.get will only run if the type of request has a GET method
@@ -39,12 +40,19 @@ const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
     Note: A response method call is required for every request otherwise the server will "hang" and timeout after 30-60 seconds
 */
 
-// Product "show" route - GET - one product 
+// Products "show" route - GET - one product 
 
-app.get('/products/:productId/', (req, res) => {
-    let productId = req.params.productId
+app.get('/products/all', (req,res)=>{
+    console.log('hitting all route')
+    res.send('will this ever run?')
+})
+
+app.get('/products/:id/', (req, res) => {
+    let productId = req.params.id
+    console.log('hitting show route')
     res.send(products[productId])
 })
+
 
 // Product "index" route - GET - all products
 
