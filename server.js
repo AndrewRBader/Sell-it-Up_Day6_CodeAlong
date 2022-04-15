@@ -7,16 +7,24 @@ const app = express();
 // configure the app settings (used by app.listen)
 const PORT = 4000;
 
+
+
+
 /* 
-    App Data
+    App Data:
+    The products routes below accesses data from the 'products' array (DB) by its index value - we will use 'productId' as the param key.
 */
 
 const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
 
 
+
+
 /* 
-    EXPRESS Middleware - a topic for day 3 of express - this code will run for every route
+    EXPRESS Middleware - a later topic - this code will run for every route
 */
+
+
 
 
 /* 
@@ -31,14 +39,24 @@ const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
     Note: A response method call is required for every request otherwise the server will "hang" and timeout after 30-60 seconds
 */
 
+// Product "show" route - GET - one product 
 
-// a products route that accesses data from the 'products' array (DB)
 app.get('/products/:productId/', (req, res) => {
     let productId = req.params.productId
-    res.send(`testing products route for product: ${products[productId]}`)
+    res.send(products[productId])
 })
 
+// Product "index" route - GET - all products
+
+app.get('/products', (req,res)=>{
+    res.send(products)
+})
+
+// "Home" route
 app.get('/', (request, response) => response.send('Welcome to Sell-it-UP!'))
+
+
+
 
 /* 
     EXPRESS Server: initializes the server; app.listen allows your computer to receive requests at http://localhost:4000/ 
