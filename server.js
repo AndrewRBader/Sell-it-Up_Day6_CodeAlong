@@ -25,6 +25,10 @@ const products = require('./models/product_model')
     EXPRESS Middleware - a later topic - this code will run for every route
 */
 
+// first middleware - middleware executes for every request - 
+// express.static helps express find where certain files are located
+app.use(express.static('public'))
+
 
 
 // CONTROLLER 
@@ -42,24 +46,29 @@ const products = require('./models/product_model')
 
 // Products "show" route - GET - one product 
 
-app.get('/products/all', (req,res)=>{
+app.get('/products/all', (req, res) => {
     console.log('hitting all route')
     res.send('will this ever run?')
 })
 
 app.get('/products/:id/', (req, res) => {
     let productId = req.params.id
-    console.log('hitting show route')
-    res.send(products[productId])
+    console.log(' hitting show route')
+    // res.send(products[productId])
+    const context = { 
+        oneProduct: products[productId], 
+        message: 'I am the show route' 
+    }
+    res.render('show.ejs', context)
 })
 
 
 // Product "index" route - GET - all products
 
-app.get('/products', (req,res)=>{
+app.get('/products', (req, res) => {
     // res.send(products)
     const context = { products }
-    console.log(app.locals)
+    // console.log(app.locals)
     res.render('index', context)
 })
 
