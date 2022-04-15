@@ -32,19 +32,14 @@
                         <div>
                             <img class="card-image" src="<%= product.image %>" alt="Placeholder image" />
                             <div class>
-                                <h3>
-                                    <a href="/products/<%= idx %>">
-                                        <%= product.name %>
-                                    </a>
-                                </h3>
-                                <p>$<%= product.price %>
-                                </p>
-                            </div>
-                            <% } %>
-                        </div>
+                                <h3><a href="/products/<%= idx %>"><%= product.name %></a></h3>
+                            <p>$<%= product.price %>
+                        </p>
+                    </div>
+                <% } %>
             </div>
+        </div>
     </main>
-
 </body>
 
 </html>
