@@ -38,10 +38,7 @@ app.get('/products/:productId/', (req, res) => {
     res.send(`testing products route for product: ${products[productId]}`)
 })
 
-app.get('/', (request, response) => {
-
-    response.send('Welcome to Sell-it-UP!')
-})
+app.get('/', (request, response) => response.send('Welcome to Sell-it-UP!'))
 
 /* 
     EXPRESS Server: initializes the server; app.listen allows your computer to receive requests at http://localhost:4000/ 
