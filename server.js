@@ -10,6 +10,7 @@ const PORT = 4000;
 // app configs - app.set()
 app.set('view engine', 'ejs')
 
+
 /* 
     App Data:
     The products routes below accesses data from the 'products' array (DB) by its index value - we will use 'productId' as the param key.
@@ -46,10 +47,10 @@ app.use(express.static('public'))
 
 // Products "show" route - GET - one product 
 
-app.get('/products/all', (req, res) => {
-    console.log('hitting all route')
-    res.send('will this ever run?')
-})
+// app.get('/products/all', (req, res) => {
+//     console.log('hitting all route')
+//     res.send('will this ever run?')
+// })
 
 app.get('/products/:id/', (req, res) => {
     let productId = req.params.id
