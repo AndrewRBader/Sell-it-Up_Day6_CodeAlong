@@ -15,13 +15,6 @@ app.set('view engine', 'ejs')
 
 
 /* 
-    App Data:
-    The products routes below accesses data from the 'products' array (DB) by its index value - we will use 'productId' as the param key.
-*/
-
-
-
-/* 
     EXPRESS Middleware - a later topic - this code will run for every route
 */
 
@@ -40,15 +33,13 @@ app.use(methodOverride('_method'))
 
 app.use(express.urlencoded({ extended: false }))
 
-// products router
-app.use('/products', productController)
-// app.use('/transactions', productController)
-// app.use('/users', productController)
-// app.use('/products/home', homeProductsController)
 
+// CONTROLLERS 
 
+app.use('/products', productController) // "products" router
 
-// CONTROLLER 
+// additional controllers can be added here. These controllers will handle requests for other resources (transactions, users, auth, landing pages, etc)
+
 /* 
     EXPRESS Routing: express provides route methods that will intercept requests to the server:
     1. filter by method - app.get will only run if the type of request has a GET method
@@ -61,11 +52,10 @@ app.use('/products', productController)
     Note: A response method call is required for every request otherwise the server will "hang" and timeout after 30-60 seconds
 */
 
+// Products "Home" route 
 
-
-
-// Products "Home" route
 app.get('/', (request, response) => response.send('Welcome to Sell-it-UP!'))
+
 /* 
     EXPRESS Server: initializes the server; app.listen allows your computer to receive requests at http://localhost:4000/ 
 */
