@@ -9,5 +9,8 @@
     <h2><%= oneProduct.name %></h2>
     <small><%= oneProduct.price %></small>
     <img class="show-image" src="<%=oneProduct.image%>" alt="<%=oneProduct.name %>"/>
+    <div>
+        <a href="/products/<%=id%>/edit">Edit <%= oneProduct.name %></a>
+    </div>
 </body>
 </html>

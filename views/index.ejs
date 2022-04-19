@@ -23,6 +23,13 @@
                             <div class>
                                 <h3><a href="/products/<%= idx %>"><%= product.name %></a></h3>
                             <p>$<%= product.price %>
+                            <!-- add a delete form here  -->
+                            <div>
+                                <form method="POST" action="/products/<%=idx%>?_method=DELETE">
+            <!-- "/products/0?_method=DELETE" -->
+                                    <input type="submit" value="Delete Product"/>
+                                </form>
+                            </div>
                         </p>
                     </div>
                 <% } %>

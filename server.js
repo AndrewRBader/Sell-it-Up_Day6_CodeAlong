@@ -1,6 +1,9 @@
 // import express
 const express = require('express');
+const methodOverride = require('method-override')
+const productController = require('./controllers/products_controller')
 
+// console.log(productController)
 // create instance
 const app = express();
 
@@ -17,8 +20,6 @@ app.set('view engine', 'ejs')
 */
 
 
-// MODELS
-const products = require('./models/product_model')
 
 /* 
     EXPRESS Middleware - a later topic - this code will run for every route
@@ -29,11 +30,22 @@ const products = require('./models/product_model')
 
 app.use(express.static('public'))
 
+// method override middleware
+// convert a get/post request to a delete (or put) request
+app.use(methodOverride('_method'))
+
 // body-parser middleware -> intercept the data from our post request
 // take all of the data in the url-string content and create an object - req.params 
 // request body -> data - parsed by the middleware
 
 app.use(express.urlencoded({ extended: false }))
+
+// products router
+app.use('/products', productController)
+// app.use('/transactions', productController)
+// app.use('/users', productController)
+// app.use('/products/home', homeProductsController)
+
 
 
 // CONTROLLER 
@@ -49,48 +61,11 @@ app.use(express.urlencoded({ extended: false }))
     Note: A response method call is required for every request otherwise the server will "hang" and timeout after 30-60 seconds
 */
 
-// Product "new" route - GET - serves template with form for creating a new product
 
-app.get('/products/new', (req, res) => {
-    res.render('new.ejs')
-})
-
-
-// Products "show" route - GET - one product 
-
-app.get('/products/:id/', (req, res) => {
-    let productId = req.params.id
-
-    const context = {
-        oneProduct: products[productId],
-        message: 'I am the show route'
-    }
-    res.render('show.ejs', context)
-})
-
-
-// Product "index" route - GET - all products
-
-app.get('/products', (req, res) => {
-    // res.send(products)
-    const context = { products }
-    res.render('index', context)
-})
 
 
 // Products "Home" route
 app.get('/', (request, response) => response.send('Welcome to Sell-it-UP!'))
-
-
-// Products "create" route - POST requests -> request body (new product data)
-
-app.post('/products', (req, res) => {
-    
-    products.push(req.body)
-    res.redirect('/products')
-})
-
-
 /* 
     EXPRESS Server: initializes the server; app.listen allows your computer to receive requests at http://localhost:4000/ 
 */
