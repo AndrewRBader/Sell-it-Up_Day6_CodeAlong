@@ -13,7 +13,6 @@ const PORT = 4000;
 // app configs - app.set()
 app.set('view engine', 'ejs')
 
-
 /* 
     EXPRESS Middleware - a later topic - this code will run for every route
 */
@@ -51,6 +50,7 @@ app.use('/products', productController) // "products" router
     
     Note: A response method call is required for every request otherwise the server will "hang" and timeout after 30-60 seconds
 */
+
 
 // Products "Home" route 
 
