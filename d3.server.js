@@ -16,9 +16,11 @@ app.set('view engine', 'ejs')
     The products routes below accesses data from the 'products' array (DB) by its index value - we will use 'productId' as the param key.
 */
 
+// const products = ['t-shirt', 'shoes', 'necklace', 'catfood', 'jump-rope']
 
 // MODELS
 const products = require('./models/product_model')
+// console.log(products)
 
 /* 
     EXPRESS Middleware - a later topic - this code will run for every route
@@ -30,7 +32,7 @@ const products = require('./models/product_model')
 app.use(express.static('public'))
 
 // body-parser middleware -> intercept the data from our post request
-// take all of the data in the url-string content and create an object - req.params 
+// take all of the data content and create an object - req.params 
 // request body -> data - parsed by the middleware
 
 app.use(express.urlencoded({ extended: false }))
@@ -49,18 +51,23 @@ app.use(express.urlencoded({ extended: false }))
     Note: A response method call is required for every request otherwise the server will "hang" and timeout after 30-60 seconds
 */
 
-// Product "new" route - GET - serves template with form for creating a new product
+// Product "new" route - GET - serve form for creating a new product
 
 app.get('/products/new', (req, res) => {
     res.render('new.ejs')
 })
 
-
 // Products "show" route - GET - one product 
+
+// app.get('/products/all', (req, res) => {
+//     console.log('hitting all route')
+//     res.send('will this ever run?')
+// })
 
 app.get('/products/:id/', (req, res) => {
     let productId = req.params.id
-
+    console.log(' hitting show route')
+    // res.send(products[productId])
     const context = {
         oneProduct: products[productId],
         message: 'I am the show route'
@@ -74,19 +81,25 @@ app.get('/products/:id/', (req, res) => {
 app.get('/products', (req, res) => {
     // res.send(products)
     const context = { products }
+    // console.log(app.locals)
     res.render('index', context)
 })
 
 
-// Products "Home" route
+// "Home" route
 app.get('/', (request, response) => response.send('Welcome to Sell-it-UP!'))
 
 
-// Products "create" route - POST requests -> request body (new product data)
-
+// "create" route - POST requests -> request body (new product data)
 app.post('/products', (req, res) => {
-    
-    products.push(req.body)
+    // Stub out the post route 
+    // send a request and verify the request is received 
+    // if we send a post request - body parser intercepts data -> req.body
+    console.log('request body', req.body)
+    products.unshift(req.body)
+    // request object 
+
+    // res.send(req.body)
     res.redirect('/products')
 })
 
