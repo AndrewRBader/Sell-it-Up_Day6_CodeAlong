@@ -75,13 +75,24 @@ router.get('/:id/', async (req, res, next) => {
 // Products "edit" route - GET request - display an edit form for one product
 // http://localhost:4000/products/0/edit
 
-router.get('/:id/edit', (req,res)=>{
-    const foundProduct = products[req.params.id]
-    const context = {
-        product: foundProduct,
-        id: req.params.id
+router.get('/:id/edit', async (req,res, next) => {
+    try {
+        // find product by id await function
+        const updatedProduct = await db.Product.findById(req.params.id);
+        //console log updated product
+        console.log(updatedProduct);
+        // context object of updated product
+        const context = {
+            product: updatedProduct
+        }
+        //res.render the edit.ejs file and context product
+        return res.render('edit.ejs', context);
+    } 
+    catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
     }
-    res.render('edit.ejs', context)
 })
 
 
