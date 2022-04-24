@@ -151,14 +151,19 @@ router.delete('/:id', async (req, res, next) => {
 // Products "update" route - PUT request - update the Products array and redirects to show route
 // http://localhost:4000/products/0/
 
-router.put('/:id', (req,res)=>{
-    // res.send(req.body)
-    // assumptions: - have data, have id
-    // update the products with the new data
-    products[req.params.id] = req.body
-
-    // take the user 'back' to the show route for that product
-    res.redirect(`/products/${req.params.id}`)
+router.put('/:id', async(req,res, next)=>{
+    try {
+        const updatedProduct = await db.Product.findByIdAndUpdate(req.params.id, req.body);
+        //console.log updated product
+        console.log(updatedProduct);
+        // res redirect to the home index page
+        return res.redirect(`/products/${updatedProduct._id}`);
+    }
+    catch (error){
+        console.log(error);
+        req.error = error;
+        return next();
+    }
 })
 
 
