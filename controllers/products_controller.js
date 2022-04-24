@@ -33,6 +33,7 @@ router.get('/', async (req, res, next) => {
     try {
         const products = await db.Product.find({});
         const context = { products }
+        console.log(products);
         return res.render('index.ejs', context);
     } catch (error) {
         console.log(error);
@@ -95,10 +96,20 @@ router.get('/:id/edit', (req,res)=>{
 
 // http://localhost:4000/products/
 
-router.post('/', (req, res) => {
-    
-    products.push(req.body)
-    res.redirect('/products')
+router.post('/', async(req, res, next) =>{
+    try{
+        console.log(req.body);
+        //want to create a new req.body need await
+        const createdProduct = await db.Product.create(req.body);
+        //print out the created product (req.body)
+        console.log(`created product: ${createdProduct}`);
+        // redirect to the index products route
+        res.redirect('/products');
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
 })
 
 
