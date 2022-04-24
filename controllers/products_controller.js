@@ -10,7 +10,7 @@ const router = express.Router()
 */
 
 // MODELS
-const products = require('../models/product_model')
+const products = require('../models/Product')
 
 
 // express.Router breakdown 
