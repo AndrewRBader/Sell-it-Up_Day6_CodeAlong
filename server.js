@@ -6,6 +6,9 @@ const productController = require('./controllers/products_controller')
 // create instance
 const app = express();
 
+// mongo db connection
+require('./config/db.connection');
+
 // configure the app settings (used by app.listen)
 const PORT = 4000;
 
