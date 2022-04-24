@@ -4,13 +4,12 @@
 <body>
     <%- include('partials/nav.ejs')%>
     <h1>Show Page</h1>
-    <p><%= message %></p>
     <!-- product object referenced by oneProduct -->
     <h2><%= oneProduct.name %></h2>
     <small><%= oneProduct.price %></small>
     <img class="show-image" src="<%=oneProduct.image%>" alt="<%=oneProduct.name %>"/>
     <div>
-        <a href="/products/<%=id%>/edit">Edit <%= oneProduct.name %></a>
+        <a href="/products/<%=oneProduct._id%>/edit">Edit <%= oneProduct.name %></a>
     </div>
 </body>
 </html>

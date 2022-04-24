@@ -54,15 +54,20 @@ router.get('/new', (req, res) => {
 // Products "show" route - GET request - display details about one product 
 // http://localhost:4000/products/0
 
-router.get('/:id/', (req, res) => {
-    let productId = req.params.id
-
-    const context = {
-        oneProduct: products[productId],
-        message: 'I am the show route',
-        id: productId
+router.get('/:id/', async (req, res, next) => {
+    try {
+        const foundProduct = await db.Product.findById(req.params.id)
+        //console.log found product
+        console.log(foundProduct);
+        // set up context object with key contains the found product
+        const context = {oneProduct: foundProduct};
+        // res.render the show.ejs file with context
+        res.render('show.ejs', context);
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
     }
-    res.render('show.ejs', context)
 })
 
 
