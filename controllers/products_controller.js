@@ -123,15 +123,16 @@ router.post('/', async(req, res, next) =>{
 
 // http://localhost:4000/products/0/ 
 
-router.delete('/:id', (req,res)=>{
-    // remove a value from an array at a given index 
-    products.splice(req.params.id , 1 )
-    // notes on splice - https://www.w3schools.com/jsref/jsref_splice.asp
-    
-    // res.status(200).send(`current products remaining: ${products.length}`) >> testing the updated product length(quantity of products)
-
-    res.redirect('/products')
-
+router.delete('/:id', async (req, res, next) => {
+   try {
+    const deletedProduct = await db.Product.findByIdAndDelete(req.params.id);
+    console.log(deletedProduct);
+    res.redirect('/products');
+   } catch (error) {
+    console.log(error);
+    req.error = error;
+    return next();
+   }
 })
 
 
