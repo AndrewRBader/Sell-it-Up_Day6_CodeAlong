@@ -10,7 +10,8 @@ const router = express.Router()
 */
 
 // MODELS
-const products = require('../models/Product')
+// from models directory, dont need index.js
+const db = require('../models')
 
 
 // express.Router breakdown 
@@ -26,6 +27,20 @@ const products = require('../models/Product')
 
 
 /*  Beginning of Products routes */
+
+// get all products route
+router.get('/', async (req, res, next) => {
+    try {
+        const products = await db.Product.find({});
+        const context = { products }
+        return res.render('index.ejs', context);
+    } catch (error) {
+        console.log(error);
+        req.error = error;
+        return next();
+    }
+});
+
 
 // Product "new" route - GET request- displays form for creating a new product
 
@@ -68,11 +83,11 @@ router.get('/:id/edit', (req,res)=>{
 // Product "index" route - GET request - displays all products
 // http://localhost:4000/products
 
-router.get('/', (req, res) => {
-    // res.send(products)
-    const context = { products }
-    res.render('index', context)
-})
+// router.get('/', (req, res) => {
+//     // res.send(products)
+//     const context = { products }
+//     res.render('index', context)
+// })
 
 
 
