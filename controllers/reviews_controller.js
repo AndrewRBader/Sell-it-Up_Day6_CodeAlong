@@ -21,7 +21,7 @@ router.get('/new', async(req, res, next) =>{
 
 // create
 router.post('/', async(req, res, next) =>{
-    res.send('hitting review create')
+    res.send(req.body)
 })
 
 // show
