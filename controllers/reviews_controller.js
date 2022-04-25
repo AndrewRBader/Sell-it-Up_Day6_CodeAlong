@@ -35,7 +35,7 @@ router.put('/:reviewId', async(req, res, next) =>{
 })
 
 // edit
-router.get('/:reviewId', async(req, res, next) =>{
+router.get('/:reviewId/edit', async(req, res, next) =>{
     res.send('hitting review edit: ' +req.params.reviewId);
 })
 
