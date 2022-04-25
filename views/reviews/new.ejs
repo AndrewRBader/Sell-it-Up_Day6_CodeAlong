@@ -25,6 +25,10 @@
             </label><br/>
             <input type = "submit" value = "create review" />
         </form>
+
+        <% for (let i = 0; i<products.length ; i++) { %>
+            <p><%= products[i]._id %></p>
+        <% } %>
     </body>
 
 </html>

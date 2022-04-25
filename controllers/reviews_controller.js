@@ -16,7 +16,17 @@ router.get('/', async(req, res, next) =>{
 
 // new 
 router.get('/new', async(req, res, next) =>{
-    res.render('reviews/new.ejs')
+    try {
+        const allProducts = await db.Product.find({})
+        console.log(allProducts)
+        const context = {products: allProducts}
+        res.render('reviews/new.ejs', context)
+
+    } catch (err){
+        console.log(error);
+        req.erorr = error;
+        return next();
+    }
 })
 
 // create
