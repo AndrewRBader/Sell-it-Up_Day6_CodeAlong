@@ -18,17 +18,12 @@
                 Related Product
                 <!-- select options for rating -->
                 <select name = "product">
-                    <option value = "1">Test Value 1</option>
-                    <option value = "2">Test Value 2</option>
-                    <option value = "3">Test Value 3</option>
+                    <% for (let i = 0; i<products.length ; i++) { %>
+                        <option value = "<%= products[i]._id %>"><%= products[i].name %></option>
+                    <% } %>
                 </select>
             </label><br/>
             <input type = "submit" value = "create review" />
         </form>
-
-        <% for (let i = 0; i<products.length ; i++) { %>
-            <p><%= products[i]._id %></p>
-        <% } %>
     </body>
-
 </html>
