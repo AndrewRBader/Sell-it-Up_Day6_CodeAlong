@@ -26,7 +26,8 @@ router.post('/', async(req, res, next) =>{
 
 // show
 router.get('/:reviewId', async(req, res, next) =>{
-    res.send('hitting review show: ' +req.params.reviewId);
+    // res.send('hitting review show: ' +req.params.reviewId);
+    res.render('reviews/show.ejs');
 })
 
 // update - PUT route
