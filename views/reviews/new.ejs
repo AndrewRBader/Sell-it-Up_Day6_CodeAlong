@@ -5,7 +5,26 @@
 
     <body>
         <h1>New Review Page</h1>
-        
+        <form action = "/reviews" method = "POST">
+            <label>
+                Rating (Number)
+                <input type = "number" name = "rating" />
+            </label><br/>
+            <label>
+                Your Review (String)
+                <input type = "string" name = "content" />
+            </label><br/>
+            <label>
+                Related Product
+                <!-- select options for rating -->
+                <select name = "product">
+                    <option value = "1">Test Value 1</option>
+                    <option value = "2">Test Value 2</option>
+                    <option value = "3">Test Value 3</option>
+                </select>
+            </label><br/>
+            <input type = "submit" value = "create review" />
+        </form>
     </body>
 
 </html>
