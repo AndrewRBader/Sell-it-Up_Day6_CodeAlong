@@ -31,7 +31,16 @@ router.get('/new', async(req, res, next) =>{
 
 // create
 router.post('/', async(req, res, next) =>{
-    res.send(req.body)
+    try{
+        const newReviewData = req.body;
+        const newReview = await db.Reviews.create(newReviewData);
+        console.log(newReview);
+        res.redirect('/reviews');
+    } catch(err){
+        console.log(error);
+        req.error = error;
+        return next();
+    }
 })
 
 // show
