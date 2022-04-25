@@ -16,7 +16,7 @@ router.get('/', async(req, res, next) =>{
 
 // new 
 router.get('/new', async(req, res, next) =>{
-    res.send('hitting review new')
+    res.render('reviews/new.ejs')
 })
 
 // create
