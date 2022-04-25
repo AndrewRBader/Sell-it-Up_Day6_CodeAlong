@@ -57,8 +57,9 @@ router.get('/new', (req, res) => {
 router.get('/:id/', async (req, res, next) => {
     try {
         const foundProduct = await db.Product.findById(req.params.id)
-        //console.log found product
-        console.log(foundProduct);
+        // reviews to pass to template
+        const allReviews = await db.Reviews.find({product: req.params.id})
+        console.log(allReviews[0], allReviews.length, 'Reviews found');
         // set up context object with key contains the found product
         const context = {oneProduct: foundProduct};
         // res.render the show.ejs file with context
