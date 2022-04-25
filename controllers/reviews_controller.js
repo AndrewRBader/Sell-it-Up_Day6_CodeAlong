@@ -55,7 +55,7 @@ router.post('/', async(req, res, next) =>{
 router.get('/:reviewId', async(req, res, next) =>{
     try{
         const foundReview = await db.Reviews.findById(req.params.reviewId).populate('product')
-        res.send(foundReview)
+        res.render('reviews/show.ejs', {review: foundReview})
     }catch(error){
         console.log(error);
         req.error = error;
