@@ -53,8 +53,15 @@ router.post('/', async(req, res, next) =>{
 
 // show
 router.get('/:reviewId', async(req, res, next) =>{
-    // res.send('hitting review show: ' +req.params.reviewId);
-    res.render('reviews/show.ejs');
+    try{
+        const foundReview = await db.Reviews.findById(req.params.reviewId);
+        
+        res.send(foundReview);
+    }catch(error){
+        console.log(error);
+        req.error = error;
+        return next();
+    }
 })
 
 // update - PUT route
