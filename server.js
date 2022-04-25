@@ -1,7 +1,7 @@
 // import express
 const express = require('express');
 const methodOverride = require('method-override')
-const productController = require('./controllers/products_controller')
+const controllers = require('./controllers/')
 //
 // create instance
 const app = express();
@@ -37,9 +37,9 @@ app.use(express.urlencoded({ extended: false }))
 
 // CONTROLLERS 
 
-app.use('/products', productController) // "products" router
+app.use('/products', controllers.products) // "products" router
+app.use('/reviews', controllers.reviews) //" reviews" router
 
-// additional controllers can be added here. These controllers will handle requests for other resources (transactions, users, auth, landing pages, etc)
 
 /* 
     EXPRESS Routing: express provides route methods that will intercept requests to the server:
