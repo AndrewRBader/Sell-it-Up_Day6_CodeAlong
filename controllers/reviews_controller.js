@@ -11,7 +11,15 @@ const db = require('../models')
 //Routes//
 // index route
 router.get('/', async(req, res, next) =>{
-    res.send('hitting review index')
+    try{
+        const allReviews = await db.Reviews.find({});
+        res.send(allReviews);
+
+    }catch(error){
+        console.log(error);
+        req.error = error;
+        return next();
+    }
 })
 
 // new 
