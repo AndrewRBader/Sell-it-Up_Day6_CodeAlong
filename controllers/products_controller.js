@@ -139,16 +139,21 @@ router.post('/', async(req, res, next) =>{
 // http://localhost:4000/products/0/ 
 
 router.delete('/:id', async (req, res, next) => {
-   try {
+    try {
     const deletedProduct = await db.Product.findByIdAndDelete(req.params.id);
-    console.log(deletedProduct);
+    // collect and delete all of the product's associated reviews
+    const deletedReviews = await db.Reviews.deleteMany({product: req.params.id});
+    console.log(deletedReviews);
     res.redirect('/products');
-   } catch (error) {
+   } 
+    catch (error) {
     console.log(error);
     req.error = error;
     return next();
    }
 })
+
+
 
 
 
