@@ -14,6 +14,16 @@
 
     <section>
         <h2>Product Reviews</h2>
+        <div>
+            <h3>Create a Review</h3>
+            <form>
+                <input name = "rating" type = "number">
+                <input name = "content" type = "text">
+                <!-- populate with product.id -->
+                <input type = "text" value = "<%=oneProduct.id%>" />
+                <input type = "submit" value = "Share your thoughts..."/>
+            </form>
+        </div>
         <% for (let i=0; i<reviews.length; i++) { %>
             <div>
                 <h3>Rating: <%= reviews[i].rating %></h3>
