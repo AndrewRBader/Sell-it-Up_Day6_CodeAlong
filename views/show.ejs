@@ -11,5 +11,15 @@
     <div>
         <a href="/products/<%=oneProduct._id%>/edit">Edit <%= oneProduct.name %></a>
     </div>
+
+    <section>
+        <h2>Product Reviews</h2>
+        <% for (let i=0; i<reviews.length; i++) { %>
+            <div>
+                <h3>Rating: <%= reviews[i].rating %></h3>
+                <p><%= reviews[i].content %></p>
+            </div>
+        <% } %>
+    </section>
 </body>
 </html>
