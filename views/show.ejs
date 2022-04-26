@@ -16,11 +16,11 @@
         <h2>Product Reviews</h2>
         <div>
             <h3>Create a Review</h3>
-            <form>
+            <form method="POST" action="/reviews" >
                 <input name = "rating" type = "number">
                 <input name = "content" type = "text">
                 <!-- populate with product.id -->
-                <input type = "text" value = "<%=oneProduct.id%>" />
+                <input type = "hidden" name = "product" value = "<%=oneProduct.id%>" />
                 <input type = "submit" value = "Share your thoughts..."/>
             </form>
         </div>

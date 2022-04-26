@@ -43,7 +43,7 @@ router.post('/', async(req, res, next) =>{
         const newReviewData = req.body;
         const newReview = await db.Reviews.create(newReviewData);
         console.log(newReview);
-        res.redirect('/reviews');
+        res.redirect(`/products/${newReview.product}`);
     } catch(err){
         console.log(error);
         req.error = error;
